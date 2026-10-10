@@ -4,6 +4,7 @@ import com.example.kafka_overview.model.UserCustomEvent;
 import com.example.kafka_overview.service.KafkaProducer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,9 +18,9 @@ public class AppController {
     }
 
     @GetMapping
-    public String PushMessage() {
+    public String PushMessage(@RequestParam("id") String id, @RequestParam("event") String eventName) {
         try {
-            UserCustomEvent userCustomEvent = new UserCustomEvent("userId4", "Event");
+            UserCustomEvent userCustomEvent = new UserCustomEvent(id, eventName);
             kafkaProducer.send(userCustomEvent);
             return "SUCCESS";
         }

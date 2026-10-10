@@ -12,6 +12,12 @@ public class KafkaConsumer {
             groupId = "${spring.kafka.consumer.group-id}"
     )
     public void consume(UserCustomEvent message) {
+
         System.out.println("Received: " + message);
+
+        if(message.getUserId().equals("-1")) {
+            throw new RuntimeException("Invalid ID");
+        }
+        // required further processing
     }
 }

@@ -15,6 +15,7 @@ public class KafkaProducer {
     }
 
     public void send(UserCustomEvent message) {
+        System.out.println("Pushing message:"+message.toString());
         kafkaTemplate.send("test-topic", message);
     }
 }
