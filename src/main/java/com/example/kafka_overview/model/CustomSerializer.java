@@ -6,7 +6,7 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 
-public class CustomSerialiser<UserEvent> implements Serializer<UserEvent> {
+public class CustomSerializer implements Serializer<UserCustomEvent> {
 
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -17,7 +17,7 @@ public class CustomSerialiser<UserEvent> implements Serializer<UserEvent> {
     }
 
     @Override
-    public byte[] serialize(String topic, UserEvent data) {
+    public byte[] serialize(String topic, UserCustomEvent data) {
         if (data == null) {
             return null;
         }
@@ -31,6 +31,6 @@ public class CustomSerialiser<UserEvent> implements Serializer<UserEvent> {
 
     @Override
     public void close() {
-        // Cleanup resources here if required
+        Serializer.super.close();
     }
 }

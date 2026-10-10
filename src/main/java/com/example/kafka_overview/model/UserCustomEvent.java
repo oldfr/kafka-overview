@@ -1,13 +1,13 @@
 package com.example.kafka_overview.model;
 
-public class UserEvent {
+public class UserCustomEvent {
     private String userId;
     private String eventType;
 
-    public UserEvent() {
+    public UserCustomEvent() {
     }
 
-    public UserEvent(String userId, String eventType) {
+    public UserCustomEvent(String userId, String eventType) {
         this.userId = userId;
         this.eventType = eventType;
     }
