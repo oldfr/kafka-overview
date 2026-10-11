@@ -16,11 +16,14 @@ public class KafkaErrorConfig {
     public DefaultErrorHandler errorHandler(KafkaTemplate<String, UserCustomEvent> template) {
         // 1. Send failed records to the Dead Letter Topic after retries fail
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(template,
-                (record, exception) ->
-                        new TopicPartition(
-                                record.topic() + ".DLT",
-                                record.partition()
-                        )
+                (record, exception) -> {
+                    String dltTopic = record.topic() + ".DLT";
+                    System.out.println("pushed message :"+record.value()+" to DLT:"+dltTopic);
+                    return  new TopicPartition(
+                            dltTopic,
+                            record.partition()
+            );
+                }
         );
 
 
